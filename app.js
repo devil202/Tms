@@ -10,7 +10,7 @@ app.set('view engine','ejs');
 app.use(body.urlencoded({extended:true}));
 app.use(express.static('public'));
 // db.connect('mongodb://localhost/Tms');
-db.connect('mongodb://himanshu:himanshu@ds135917.mlab.com:35917/tms');
+db.connect('mongodb://usernamer:password@ds135917.mlab.com:35917/tms');
 
 app.get('/',function(req,res)
 {

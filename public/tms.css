@@ -1,0 +1,10 @@
+body,html{
+	background-image:url(https://i.ytimg.com/vi/w5ZbqxJB66s/maxresdefault.jpg);
+	background-position:center;
+	height: 100%;
+	width: 100%;
+	padding: 100px;
+}
+input{
+	min-width: 150px;
+}

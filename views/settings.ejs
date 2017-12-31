@@ -1,0 +1,45 @@
+<% include ../Metadata/header %>
+<div class="ui segment inverted container">
+	<div class="ui centered grid">
+		<div class="two column row">
+			<div class="item" style="padding-right:50px;">
+				<label>Agricultural Equipment</label>
+			</div>
+			<div class="item">
+				<label>RATE</label>
+			</div>
+		</div>
+		<%rates.forEach(function(rate){ %>
+			<div class="two column row">
+				<div class="item" style="padding-right:50px;">
+					<label> <%=rate.name%></label>
+				</div>
+				<div class="item">
+					<label> <%=rate.rate%></label>
+				</div>
+			</div>		
+		<%})%>
+	</div>
+	<form class="ui inverted centered grid form" action="/setting" method="post">
+		<div class="fields">
+			<div class="field">
+				<label class="text">Type Of Agriculture Equipment</label>
+				<select name="x[name]">
+				<option class="item" value="Rotavator">Rotavator</option>
+                <option class="item" value="Shovel Cultivator(Hal)" selected="true">Shovel Cultivator(Hal)</option>
+                <option class="item" value="Harrow Discs(Tai)">Harrow Discs(Tai)</option>
+                <option class="item" value="Plough">Plough</option>
+				</select>
+			</div>
+			<div class="field">
+				<label class="text">Rate</label>
+				<input type="text" name="x[rate]" placeholder="700">
+			</div>
+		</div>
+		<input type="submit" class="ui submit blue button" value="Submit" >
+</form>
+	
+</div>
+
+
+<% include ../Metadata/footer %>

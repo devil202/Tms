@@ -1,0 +1,45 @@
+<% include ../Metadata/header %>
+<div class="ui inverted segment container" style="opacity:0.75;height:100%;">
+  <div class="ui centered grid">  
+    <%include ../Metadata/row %>
+    <form class="ui inverted big form" style="opacity:1;" action="/new" method="post">
+      <div class="fields">
+        <div class="field">
+          <label>Full Name</label>
+          <input placeholder="Name" type="text" name="x[name]" required="true">
+        </div>
+        <div class="field">
+          <label>Phone Number</label>
+          <input placeholder="7508XXXXXX" type="text" name="x[username]" required="true">
+        </div>
+      </div>
+      <div class="fields">
+        <div class="field">
+          <label>Area</label>
+          <input type="text" name="x[area]" placeholder="10" required="true">
+        </div>
+        <div class="field">
+        <label>Select Equipment</label>
+          <select name="x[equip]">
+                <option class="item" value="Rotavator">Rotavator</option>
+                <option class="item" value="Shovel Cultivator(Hal)" selected="true">Shovel Cultivator(Hal)</option>
+                <option class="item" value="Harrow Discs(Tai)">Harrow Discs(Tai)</option>
+                <option class="item" value="Plough">Plough</option>
+              </select>
+        </div>
+      </div>
+      <div class="fields">
+        <div class="field">
+          <label>Loacation</label>
+          <input type="text" name="x[loc]" placeholder="Kundsar" required="true">
+        </div>
+        <div class="field">
+          <label>Amount Paid</label>
+          <input type="text" name="x[payment]" placeholder="1000" required="true">
+        </div>
+      </div>
+      <input type="submit" class="ui submit blue button" value="Submit">
+    </form>
+  </div>
+</div>
+<% include ../Metadata/footer %>

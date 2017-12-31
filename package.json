@@ -1,0 +1,20 @@
+{
+  "name": "tractor-management-system",
+  "version": "1.0.0",
+  "description": "This is simple managing node app",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.0-rc0",
+    "passport-local-mongoose": "^4.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node app.js"
+  },
+  "author": "Himanshu Singh",
+  "license": "ISC"
+}

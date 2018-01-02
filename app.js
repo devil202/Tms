@@ -53,7 +53,7 @@ function calculation(user,data)
 app.set('view engine','ejs');
 app.use(body.urlencoded({extended:true}));
 app.use(express.static('public'));
-db.connect('mongodb://localhost/Tms');
+// db.connect('mongodb://localhost/Tms');
 db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
 
 app.get('/',function(req,res)

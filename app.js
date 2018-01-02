@@ -53,8 +53,8 @@ function calculation(user,data)
 app.set('view engine','ejs');
 app.use(body.urlencoded({extended:true}));
 app.use(express.static('public'));
-db.connect('mongodb://localhost/Tms');
-
+// db.connect('mongodb://localhost/Tms');
+db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
 
 app.get('/',function(req,res)
 {
@@ -121,6 +121,44 @@ app.post('/new',function(req,res)
 });
 
 
+app.get('/update',function(req,res)
+{
+	res.render('update',{x:false});
+});
+
+app.post('/update',function(req,res)
+{
+	var username=req.body.username;
+	var payment=req.body.payment;
+	users.findOne({username:username},function(err,user)
+	{
+		if(user==null)
+		{
+			res.back();
+		}
+		else
+		{
+			details.create({
+				username:username,
+				name:user.name,
+				payment:payment,	
+			},function(err,d)
+			{
+				var old=user.total;
+				user.details.push(d._id);
+				user.ctotal+=parseInt(payment);
+				user.total=user.dtotal-user.ctotal;
+				user.save(function(err,user)
+				{
+					if(err)console.log(err);
+					else res.render('update',{x:true,old:old,total:user.total});
+				});
+			});
+		}
+	});
+});
+
+
 app.get('/setting',function(req,res)
 {
 	rate.find({},function(error,rates)
@@ -153,14 +191,21 @@ app.post('/setting',function(req,res)
 		}
 	});
 });
+
 app.get('/search',function(req,res)
 {
-	var username="7508276344";
+	res.render('search',{x:false});
+});
+
+
+app.post('/search',function(req,res)
+{
+	var username=req.body.username;
 	users.find({'username':username}).populate("details").exec(function(error,content)
 	{
 		if(!error)
 		{
-			res.render('search',{content:content[0].details,user:content[0]});
+			res.render('search',{content:content[0].details,user:content[0],x:true});
 		}
 		else
 		{

@@ -1,0 +1,23 @@
+<% include ../Metadata/header %>
+<div class="ui inverted centered grid segment container">
+	<form class="ui inverted form" action="/update" method="post">
+		<div class="fields">
+			<div class="field">
+				<label>Enter Username To Update</label>
+				<input type="text" name="username" placeholder="7508XXXXXX">
+			</div>
+			<div class="field">
+				<label>Amount Paid</label>
+				<input type="text" name="payment" placeholder="100">
+			</div>
+		</div>
+		<input type="submit" class="ui submit blue button" value="Update">
+	</form>
+</div>
+<%if(x){%>
+	<div class="ui inverted segment container">
+		<h1 class="col">Old Tolal : <%=old%></h1>
+		<h1 class="col">Due Amount : <%=total%></h1>
+	</div>
+<%}%>
+<% include ../Metadata/footer %>

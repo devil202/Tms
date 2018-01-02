@@ -1,6 +1,18 @@
 <% include ../Metadata/header %>
+<div class="ui inverted centered grid segment">
+	<form class="ui inverted form" action="/search" method="post">
+		<div class="fields">
+			<div class="field">
+				<label class="heading">Enter Username To Search</label>
+				<input type="text" name="username" placeholder="7508XXXXXX">
+			</div>
+		</div>
+		<input type="submit" class="ui submit blue button" value="Search">
+	</form>
+</div>
+<%if(x){%>
 <div class="ui inverted padded segment">
-	<div class="ui stackable centered grid">
+	<div class="ui stackable centered grid" style="overflow:scroll;height:720px;width:100%;overflow:auto;">
 	<% include ../Metadata/row %>
 	<div class="row display">
 			<div class="sixteen wide column" style="text-align:center;">Full Name : <%=user.name%></div>
@@ -36,4 +48,5 @@
 	<% include ../Metadata/row %>
 	</div>
 </div>
+<%}%>
 <% include ../Metadata/footer %>

@@ -1,24 +1,24 @@
 body,html{
 	background-image:url(https://i.ytimg.com/vi/w5ZbqxJB66s/maxresdefault.jpg);
-	background-position:center;
 	height: 100%;
 	width: 100%;
-	padding: 100px;
+	padding:50px;
+	background-position:center;
 	background-repeat: no-repeat;
-	/*font-size: 1rem;*/
+	font-size: 0.8vw;
 }
 input{
-	min-width: 150px;
+	min-width:50px;
 }
 .segment{
 	opacity: 0.75;
 }
 .display{
-	font-size: 2.5vw;
+	font-size: 2vw;
 	color: white;
 }
 .heading{
-	font-size:2vw;
+	font-size:1.5vw;
 	color: cyan;
 }
 .col{

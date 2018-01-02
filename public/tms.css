@@ -19,7 +19,8 @@ input{
 }
 .data
 {
-	font-size: 1.5vw;
+	font-size: 2vw;
+	color:  #f39c12;
 }
 .heading{
 	font-size:2vw;

@@ -134,24 +134,24 @@ app.get('/setting',function(req,res)
 
 app.post('/setting',function(req,res)
 {
-	// rate.create(req.body.x,function(error,rate)
-	// {
-	// 	if (!error) {
-	// 		res.render('settings');
-	// 	}
-	// });
-	// console.log(req.body.x);
-	rate.findOneAndUpdate({'name':req.body.x.name},req.body.x,function(error,rate){
-		if(!error)
-		{
-			rates();
-			res.redirect('/setting');
-		}
-		else
-		{
-			console.log(error);
+	rate.create(req.body.x,function(error,rate)
+	{
+		if (!error) {
+			res.render('settings');
 		}
 	});
+	// console.log(req.body.x);
+	// rate.findOneAndUpdate({'name':req.body.x.name},req.body.x,function(error,rate){
+	// 	if(!error)
+	// 	{
+	// 		rates();
+	// 		res.redirect('/setting');
+	// 	}
+	// 	else
+	// 	{
+	// 		console.log(error);
+	// 	}
+	// });
 });
 app.get('/search',function(req,res)
 {

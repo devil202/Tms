@@ -75,6 +75,7 @@ app.post('/new',function(req,res)
 {
 	var username=req.body.x.username;
 	var X=req.body.x;
+	X.name=X.name.toLowerCase();
 	details.create(X,function(err,data)
 	{
 		if(err)
@@ -201,7 +202,7 @@ app.get('/search',function(req,res)
 app.post('/search',function(req,res)
 {
 	var username=req.body.username;
-	users.find({$or:[{username:username},{name:username}]}).populate("details").exec(function(error,content)
+	users.find({$or:[{username:username},{name:username.toLowerCase()}]}).populate("details").exec(function(error,content)
 	{
 		if(content.length)
 		{

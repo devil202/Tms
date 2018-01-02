@@ -2,7 +2,7 @@ body,html{
 	background-image:url(https://i.ytimg.com/vi/w5ZbqxJB66s/maxresdefault.jpg);
 	height: 100%;
 	width: 100%;
-	padding:50px;
+	padding-top:50px;
 	background-position:center;
 	background-repeat: no-repeat;
 	font-size: 2.5vw;
@@ -20,7 +20,7 @@ input{
 .data
 {
 	font-size: 2vw;
-	color:  #f39c12;
+	color: yellow;
 }
 .heading{
 	font-size:2vw;

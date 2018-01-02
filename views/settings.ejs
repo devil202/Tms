@@ -1,26 +1,26 @@
 <% include ../Metadata/header %>
-<div class="ui segment inverted container">
+<div class="ui segment inverted container" style="opacity:0.75;height:100%;">
 	<div class="ui centered grid">
 		<div class="two column row">
-			<div class="item" style="padding-right:50px;">
+			<div class="eight wide column" style="padding-right:50px;">
 				<label>Agricultural Equipment</label>
 			</div>
-			<div class="item">
+			<div class="eight wide column">
 				<label>RATE</label>
 			</div>
 		</div>
 		<%rates.forEach(function(rate){ %>
 			<div class="two column row">
-				<div class="item" style="padding-right:50px;">
+				<div class="eight wide column" style="padding-right:50px;">
 					<label> <%=rate.name%></label>
 				</div>
-				<div class="item">
+				<div class="eight wide column">
 					<label> <%=rate.rate%></label>
 				</div>
 			</div>		
 		<%})%>
-	</div>
-	<form class="ui inverted centered grid form" action="/setting" method="post">
+	</div><br><br><br>
+	<form class="ui inverted form" action="/setting" method="post" style="opacity:1;">
 		<div class="fields">
 			<div class="field">
 				<label class="text">Type Of Agriculture Equipment</label>

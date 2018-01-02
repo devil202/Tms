@@ -4,9 +4,10 @@ var userSchema=new db.Schema({
 	username:String,
 	name:String,
 	password:String,
-	detail:[{
+	role:String,
+	details:[{
 		type:db.Schema.Types.ObjectId,
-		ref:"Detail"
+		ref:"detail"
 	}],
 	date:{type:Date,default:Date.now},
 	ctotal:{type:Number,default:0},

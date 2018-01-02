@@ -6,11 +6,55 @@ var express=require('express'),
 	rate=require('./models/Rate'),
 	app=express();
 
+var hal=0,tai=0,plough=0,rota=0,cp=0,to=0;
+
+function rates() {
+	rate.find({},function(error,rates)
+	{
+		rates.forEach(function(rate){
+			if(rate.name=="Rotavator")
+				rota=rate.rate;
+			else if(rate.name=="Shovel Cultivator(Hal)")
+				hal=rate.rate;
+			else if(rate.name=="Harrow Discs(Tai)")
+				tai=rate.rate;
+			else if(rate.name=="Plough")
+				plough=rate.rate;
+		});
+	});
+}
+
+rates();
+
+function total(c,q)
+{
+	var r=parseInt(q);
+	if(c=="Rotavator")
+		to=rota*r;
+	else if(c=="Plough")
+		to=plough*r;
+	else if(c=="Harrow Discs(Tai)")
+		to=tai*r;
+	else if(c=="Shovel Cultivator(Hal)")
+		to=hal*r;
+}
+
+
+function calculation(user,data)
+{
+	cp=parseInt(data.payment);
+	total(data.equip,data.area);
+	user.ctotal+=cp;
+	user.dtotal+=to;
+	user.total=user.dtotal-user.ctotal;	
+	console.log(user.total);
+}
+
 app.set('view engine','ejs');
 app.use(body.urlencoded({extended:true}));
 app.use(express.static('public'));
-// db.connect('mongodb://localhost/Tms');
-db.connect('mongodb://usernamer:password@ds135917.mlab.com:35917/tms');
+db.connect('mongodb://localhost/Tms');
+db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
 
 app.get('/',function(req,res)
 {
@@ -19,7 +63,6 @@ app.get('/',function(req,res)
 
 app.post('/signin',function(req,res)
 {
-	console.log(req.body);
 	res.redirect('/new');
 });
 
@@ -32,49 +75,49 @@ app.post('/new',function(req,res)
 {
 	var username=req.body.x.username;
 	var X=req.body.x;
-	users.findOne({'username':username},function(err,user)
+	details.create(X,function(err,data)
 	{
-		console.log(user);
-		if(user==null)
-		{
-			users.create({
-				'username':username,
-				'name':X.name,
-				'password':'123456789a'
-			},function(err,user)
-			{
-				// console.log(user);
-				details.create(X,function(err,detail)
-				{
-					// console.log(details);
-					if(!err)
-					{
-						console.log(detail);
-						user.detail.push(detail);
-						user.save();
-					}
-					else
-					console.log(err);
-				});	
-			});
-		}
+		if(err)
+		console.log(err);
 		else
 		{
-			details.create(X,function(err,detail)
+			users.find({username:username},function(err,user)
 			{
-				if(!err)
+				if(user.length)
 				{
-					console.log(user);
-					user.detail.push(detail);	
-					user.save();
+					user[0].details.push(data._id);
+					calculation(user[0],data);
+					user[0].save(function(err,user)
+					{
+						if(err) res.redirect('/new');
+						else res.redirect('/search');	
+					});
 				}
 				else
-				console.log(err);
+				{
+					users.create({
+						username:username,
+						name:X.name,
+						password:'123456789a',
+						role:'user'	
+					},function(err,user)
+					{
+						if(err)console.log(err);
+						else
+						{
+							user.details.push(data._id);
+							calculation(user,data);
+							user.save(function(err,u)
+							{
+								if(err) res.redirect('/new');
+								else res.redirect('/search');
+							});
+						}
+					});
+				}
 			});
 		}
 	});
-	// res.send('hello');
-	res.redirect('/search');
 });
 
 
@@ -91,11 +134,17 @@ app.get('/setting',function(req,res)
 
 app.post('/setting',function(req,res)
 {
-	console.log(req.body.x);
+	// rate.create(req.body.x,function(error,rate)
+	// {
+	// 	if (!error) {
+	// 		res.render('settings');
+	// 	}
+	// });
+	// console.log(req.body.x);
 	rate.findOneAndUpdate({'name':req.body.x.name},req.body.x,function(error,rate){
 		if(!error)
 		{
-			console.log(rate);
+			rates();
 			res.redirect('/setting');
 		}
 		else
@@ -107,12 +156,11 @@ app.post('/setting',function(req,res)
 app.get('/search',function(req,res)
 {
 	var username="7508276344";
-	users.find({'username':username}).populate("detail").exec(function(error,content)
+	users.find({'username':username}).populate("details").exec(function(error,content)
 	{
 		if(!error)
 		{
-			console.log(content[0].detail);
-			res.render('search',{content:content[0].detail});
+			res.render('search',{content:content[0].details,user:content[0]});
 		}
 		else
 		{

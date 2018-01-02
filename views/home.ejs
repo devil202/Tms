@@ -1,9 +1,9 @@
 <% include ../Metadata/header %>
-<div class="ui padded inverted segment container" style="opacity:0.75;height:100%;">
+<div class="ui padded inverted segment container">
 	<div class="ui centered padded grid">
 	<%include ../Metadata/row %>
     <div class="four column row">
-	  <form class="ui big inverted form" style="opacity:1;" action="/signin" method="post">
+	  <form class="ui big inverted form" action="/signin" method="post">
 	    <div class="fields">
 	      <div class="field">
 	        <label>Phone Number</label>
@@ -16,9 +16,10 @@
 	        <input placeholder="*******" type="Password" name="pass">
 	      </div>
 	    </div>
-	    <input type="submit" class="ui submit blue button" value="Submit">
+	    <input type="submit" class="ui submit blue button" value="Sign In">
 	  </form>
 	  </div>
+	  <%include ../Metadata/row %>
 	</div>
 </div>
 <% include ../Metadata/footer %>

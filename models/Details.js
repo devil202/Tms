@@ -9,4 +9,4 @@ var detailSchema=new db.Schema({
 	date:{type:Date,default:Date.now}
 });
 
-module.exports=db.model('Detail',detailSchema);
+module.exports=db.model('detail',detailSchema);

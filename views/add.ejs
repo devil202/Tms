@@ -1,8 +1,8 @@
 <% include ../Metadata/header %>
-<div class="ui inverted segment container" style="opacity:0.75;height:100%;">
+<div class="ui inverted segment container">
   <div class="ui centered grid">  
     <%include ../Metadata/row %>
-    <form class="ui inverted big form" style="opacity:1;" action="/new" method="post">
+    <form class="ui inverted big form" action="/new" method="post">
       <div class="fields">
         <div class="field">
           <label>Full Name</label>
@@ -16,7 +16,7 @@
       <div class="fields">
         <div class="field">
           <label>Area</label>
-          <input type="text" name="x[area]" placeholder="10" required="true">
+          <input type="text" name="x[area]" id="area" placeholder="10" required="true">
         </div>
         <div class="field">
         <label>Select Equipment</label>
@@ -35,11 +35,12 @@
         </div>
         <div class="field">
           <label>Amount Paid</label>
-          <input type="text" name="x[payment]" placeholder="1000" required="true">
+          <input type="text" name="x[payment]" id="payment" placeholder="1000" required="true">
         </div>
       </div>
       <input type="submit" class="ui submit blue button" value="Submit">
     </form>
+    <%include ../Metadata/row %>
   </div>
 </div>
 <% include ../Metadata/footer %>

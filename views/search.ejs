@@ -1,9 +1,37 @@
 <% include ../Metadata/header %>
-
-<div style="margin-top:300px;color:red;">
-<% content.forEach(function(detail){ %>
-	<h1> <%= detail.area %></h1>
-<% }) %>
+<div class="ui inverted padded segment">
+	<div class="ui centered grid">
+	<% include ../Metadata/row %>
+	<div class="row display">
+			<div class="sixteen wide column" style="text-align:center;">Full Name : <%=user.name%></div>
+		</div>
+		<% include ../Metadata/row %>
+		<div class="row display">
+			<div class="six wide column">Phone NO : <%=user.username%></div>
+			<div class="six wide column col"> <strong>Due Amount : <%=user.total%></strong></div>
+		</div>
+		<% include ../Metadata/row %>
+		<div class="row heading">
+			<div class="one wide column">Sr NO.</div>
+			<div class="one wide column">AREA</div>
+			<div class="two wide column">EQUIPMENT</div>
+			<div class="four wide column">LOCATION</div>
+			<div class="three wide column">PAYMENT</div>
+			<div class="three wide column">DATE</div>
+		</div>
+	<% var i=1;%>
+	<% content.forEach(function(detail){ %>
+		<div class="row">
+			<div class="one wide column"><%=i%></div>
+			<div class="one wide column"><%=detail.area%></div>
+			<div class="two wide column"><%=detail.equip%></div>
+			<div class="four wide column"><%=detail.loc%></div>
+			<div class="three wide column"><%=detail.payment%></div>
+			<div class="three wide column"><%=detail.date.toDateString()%></div>
+		</div>
+		<%i+=1;%>
+	<% }) %>
+	<% include ../Metadata/row %>
+	</div>
 </div>
-
 <% include ../Metadata/footer %>

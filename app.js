@@ -53,8 +53,8 @@ function calculation(user,data)
 app.set('view engine','ejs');
 app.use(body.urlencoded({extended:true}));
 app.use(express.static('public'));
-// db.connect('mongodb://localhost/Tms');
-db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
+db.connect('mongodb://localhost/Tms');
+// db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
 
 app.get('/',function(req,res)
 {
@@ -201,15 +201,17 @@ app.get('/search',function(req,res)
 app.post('/search',function(req,res)
 {
 	var username=req.body.username;
-	users.find({'username':username}).populate("details").exec(function(error,content)
+	users.find({$or:[{username:username},{name:username}]}).populate("details").exec(function(error,content)
 	{
-		if(!error)
+		if(content.length)
 		{
+			// console.log(content);
 			res.render('search',{content:content[0].details,user:content[0],x:true});
 		}
 		else
 		{
-			console.log(error);
+			res.redirect('/search');
+			// console.log(error);
 		}
 	});
 });

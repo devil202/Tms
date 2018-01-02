@@ -30,18 +30,18 @@
 			<div class="two wide column">AREA</div>
 			<div class="four wide column">EQUIPMENT</div>
 			<div class="four wide column">LOCATION</div>
-			<div class="three wide column">PAYMENT</div>
+			<div class="two wide column">PAYMENT</div>
 			<div class="two wide column">DATE</div>
 		</div>
 	<% var i=1;%>
 	<% content.forEach(function(detail){ %>
-		<div class="row">
+		<div class="row data">
 			<div class="one wide column"><%=i%></div>
 			<div class="two wide column"><%=detail.area%></div>
 			<div class="four wide column"><%=detail.equip%></div>
 			<div class="four wide column"><%=detail.loc%></div>
-			<div class="three wide column"><%=detail.payment%></div>
-			<div class="two wide column"><%=detail.date.toDateString()%></div>
+			<div class="two wide column"><%=detail.payment%></div>
+			<div class="two wide column"><%=detail.date.toLocaleDateString().replace(/(\d+)\/(\d+)\/(\d+)/, '$2/$1/$3')%></div>
 		</div>
 		<%i+=1;%>
 	<% }) %>

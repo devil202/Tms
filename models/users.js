@@ -17,4 +17,4 @@ var userSchema=new db.Schema({
 
 userSchema.plugin(passportLocalMongoose);
 
-module.exports=db.model('User',userSchema);
+module.exports=db.model('user',userSchema);

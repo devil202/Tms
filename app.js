@@ -4,7 +4,31 @@ var express=require('express'),
 	details=require('./models/Details'),
 	users=require('./models/users'),
 	rate=require('./models/Rate'),
+	passport=require('passport'),
+	LocalStrategy=require('passport-local'),
 	app=express();
+
+
+app.use(require('express-session')({
+	secret:"This is a Tractor Management System.",
+	resave:false,
+	saveUninitialized:false
+}));
+
+// Passpost Configuration
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(users.authenticate()));
+passport.serializeUser(users.serializeUser());
+passport.deserializeUser(users.deserializeUser());
+
+
+app.use(require('express-session')({
+	secret:"This is a Yelpcamp.",
+	resave:false,
+	saveUninitialized:false
+}));
+
 
 var hal=0,tai=0,plough=0,rota=0,cp=0,to=0;
 
@@ -53,8 +77,8 @@ function calculation(user,data)
 app.set('view engine','ejs');
 app.use(body.urlencoded({extended:true}));
 app.use(express.static('public'));
-// db.connect('mongodb://localhost/Tms');
-db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
+db.connect('mongodb://localhost/Tms');
+// db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
 
 app.get('/',function(req,res)
 {
@@ -135,7 +159,7 @@ app.post('/update',function(req,res)
 	{
 		if(user==null)
 		{
-			res.back();
+			res.redirect('back');
 		}
 		else
 		{
@@ -168,6 +192,18 @@ app.get('/setting',function(req,res)
 			res.render('settings',{rates:rates});
 		else
 			console.log(error);
+	});
+});
+
+app.get('/showall',function(req,res)
+{
+	users.find({},function(err,users)
+	{
+		if(users.length)
+		{
+			res.render('showall',{users:users});
+		}
+		else res.redirect('back');
 	});
 });
 

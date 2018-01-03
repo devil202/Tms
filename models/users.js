@@ -1,5 +1,5 @@
 var db=require('mongoose');
-	// passportLocalMongoose=require('passport-local-mongoose');
+	passportLocalMongoose=require('passport-local-mongoose');
 var userSchema=new db.Schema({
 	username:String,
 	name:String,
@@ -15,6 +15,6 @@ var userSchema=new db.Schema({
 	total:{type:Number,default:0}
 });
 
-// userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose);
 
 module.exports=db.model('User',userSchema);

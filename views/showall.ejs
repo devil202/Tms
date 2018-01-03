@@ -1,0 +1,24 @@
+<% include ../Metadata/header %>
+<div class="ui inverted segment">
+	<div class="ui centered grid">
+		<div class="three column row heading">
+			<div class="column"> Full Name</div>
+			<div class="column"> Mobile Number</div>
+			<div class="column"> Due Amount</div>
+		</div>
+	<%var total=0;%>
+	<%users.forEach(function(user){%>
+		<div class="three column row data">
+			<div class="column"> <%=user.name%></div>
+			<div class="column"> <%=user.username%></div>
+			<div class="column"> <%=user.total%></div>
+		</div>
+		<% total+=user.total%>
+	<%})%>
+	<div class="row">
+		<div class="eight wide column">Total Due Amount : </div>
+		<div class="eight wide column"><%=total%> </div>
+	</div>
+	</div>
+</div>
+<% include ../Metadata/footer %>

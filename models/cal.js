@@ -17,9 +17,7 @@ function rates(callback) {
 				else if(rate.name=="Plough")
 					plough=rate.rate;
 			});
-			// callback(hal,tai,plough,rota);
 		}
-		// else callback(hal,tai,plough,rota);
 	});
 }
 
@@ -43,7 +41,6 @@ function calculation(user,data)
 	user.ctotal+=cp;
 	user.dtotal+=to;
 	user.total=user.dtotal-user.ctotal;	
-	console.log(user.total);
 }
 
 module.exports={calculation,rates};

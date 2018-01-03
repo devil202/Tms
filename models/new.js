@@ -3,17 +3,18 @@ var users=require('./users'),
 	details=require('./Details'),
 	{calculation}=require('./cal'),
 	{isLoggedIn}=require('./middleware'),
+	{admin}=require('./middleware'),
 	passport=require('passport'),
 	router=express.Router({mergeParams:true});
 
 
-router.get('/',isLoggedIn,function(req,res)
+router.get('/',[isLoggedIn,admin],function(req,res)
 {
 	res.render('add');
 });
 
 
-router.post('/',isLoggedIn,function(req,res)
+router.post('/',[isLoggedIn,admin],function(req,res)
 {
 	var username=req.body.x.username;
 	var X=req.body.x;

@@ -20,6 +20,7 @@
 			</div>		
 		<%})%>
 	</div><br><br><br>
+<%if(Admin.role=="admin"){%>
 	<form class="ui inverted form" action="/setting" method="post" style="opacity:1;">
 		<div class="fields">
 			<div class="field">
@@ -37,8 +38,10 @@
 			</div>
 		</div>
 		<input type="submit" class="ui submit blue button" value="Submit" >
+}
 </form>
-	
+<%}%>
+<a href="/changepw" class="ui active button">Change Password</a>
 </div>
 
 

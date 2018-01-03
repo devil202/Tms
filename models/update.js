@@ -2,15 +2,16 @@ var users=require('./users'),
 	express=require('express'),
 	details=require('./Details'),
 	{isLoggedIn}=require('./middleware'),
+	{admin}=require('./middleware'),
 	router=express.Router({mergeParams:true});
 
 
-router.get('/',isLoggedIn,function(req,res)
+router.get('/',[isLoggedIn,admin],function(req,res)
 {
 	res.render('update',{x:false});
 });
 
-router.post('/',isLoggedIn,function(req,res)
+router.post('/',[isLoggedIn,admin],function(req,res)
 {
 	var username=req.body.username;
 	var payment=req.body.payment;

@@ -17,8 +17,7 @@ input{
 	font-size: 3vw;
 	color: white;
 }
-.data
-{
+.data,a{
 	font-size: 2vw;
 	color: yellow;
 }
@@ -26,6 +25,13 @@ input{
 	font-size:2vw;
 	color: cyan;
 }
-.col{
+.colred{
 	color: red;
+}
+.colgreen{
+	color: green;
+}
+a:hover
+{
+	color: yellow;
 }

@@ -4,9 +4,9 @@ function isLoggedIn(req,res,next)
 {
 	if(req.isAuthenticated())
 	{
-		return admin(req,res,next);
+		return next();
 	}
-	res.redirect('back');
+	res.redirect('/');
 }
 
 function admin(req,res,next)
@@ -19,10 +19,9 @@ function admin(req,res,next)
 	{
 		users.findById(req.user.id).populate('details').exec(function(err,data)
 		{
-			// console.log(data.details);
 			res.render('search',{y:false,x:true,content:data.details,user:data});
 		});
 	}
 }
 
-module.exports={isLoggedIn};
+module.exports={isLoggedIn,admin};

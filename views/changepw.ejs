@@ -1,0 +1,29 @@
+<% include ../Metadata/header %>
+<div class="ui centered grid inverted segment container">
+	<form class="ui inverted form" action="/changepw/<%=Admin.id%>" method="post" style="opacity:1;">
+		<div class="fields">
+			<div class="field">
+				<label class="text">Chnage Password</label>
+				<input type="password" id="password" class="required" name="password" placeholder="*****">
+			</div>
+		</div>
+		<div class="fields">
+			<div class="field">
+				<input type="password"  id="cnfpass" placeholder="******" class="required">
+			</div>
+		</div>
+		<div class="fields">
+			<div class="field">
+				<h3 id="error"></h3>
+			</div>
+		</div>
+		<div class="fields">
+			<div class="field">
+				<input type="submit" class="ui blue button" id="sub" value="Change Password" >
+			</div>
+		</div>
+	</form>
+</div>
+
+
+<% include ../Metadata/footer %>

@@ -2,14 +2,15 @@ var users=require('./users'),
 	express=require('express'),
 	details=require('./Details'),
 	{isLoggedIn}=require('./middleware'),
+	{admin}=require('./middleware'),
 	router=express.Router({mergeParams:true});
 
-router.get('/',isLoggedIn,function(req,res)
+router.get('/',[isLoggedIn,admin],function(req,res)
 {
 	res.render('search',{x:false,y:true});
 });
 
-router.post('/',isLoggedIn,function(req,res)
+router.post('/',[isLoggedIn,admin],function(req,res)
 {
 	var username=req.body.username;
 	users.find({$or:[{username:username},{name:username.toLowerCase()}]}).populate("details").exec(function(error,content)

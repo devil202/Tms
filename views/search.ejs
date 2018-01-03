@@ -16,38 +16,49 @@
 <div class="ui inverted padded segment">
 	<div class="ui stackable centered grid" style="overflow:scroll;height:720px;width:100%;overflow:auto;">
 	<% include ../Metadata/row %>
-	<div class="row display">
-			<div class="sixteen wide column" style="text-align:center;">Full Name : <%=formatTitle.capWords(user.name)%></div>
+	<div class="one column row display">
+			<div class="column" style="text-align:center;">Full Name : <%=formatTitle.capWords(user.name)%></div>
 		</div>
 		<% include ../Metadata/row %>
-		<div class="row display">
-			<div class="four wide column">Phone NO : </div>
-			<div class="four wide column"><%=user.username%> </div>
-			<div class="four wide column col"> <strong>Due Amount : </strong></div>
-			<div class="four wide column col"> <strong><%=user.total%></strong></div>
+		<div class="four column row display">
+			<div class="column">Phone NO : </div>
+			<div class="column"><%=user.username%> </div>
+			<%if(user.total>=0){%>
+			<div class="column colred"> <strong>Due Amount : </strong></div>
+			<div class="column colred"> <strong><%=user.total%></strong></div>
+			<%} else {%>
+				<div class="column colgreen"> <strong>You Owe: </strong></div>
+				<div class="column colgreen"> <strong><%=Math.abs(user.total)%></strong></div>
+			<%}%>
 		</div>
 		<% include ../Metadata/row %>
-		<div class="row heading">
-			<div class="one wide column">Sr NO.</div>
-			<div class="two wide column">AREA</div>
-			<div class="four wide column">EQUIPMENT</div>
-			<div class="four wide column">LOCATION</div>
-			<div class="two wide column">PAYMENT</div>
-			<div class="two wide column">DATE</div>
+		<div class="six column row heading">
+			<div class="column">Sr NO.</div>
+			<div class="column">AREA</div>
+			<div class=" column">EQUIPMENT</div>
+			<div class=" column">LOCATION</div>
+			<div class="column">PAYMENT</div>
+			<div class="column">DATE</div>
 		</div>
 	<% var i=1;%>
 	<% content.forEach(function(detail){ %>
-		<div class="row data">
-			<div class="one wide column"><%=i%></div>
-			<div class="two wide column"><%=detail.area%></div>
-			<div class="four wide column"><%=detail.equip%></div>
-			<div class="four wide column"><%=detail.loc%></div>
-			<div class="two wide column"><%=detail.payment%></div>
-			<div class="two wide column"><%=moment(detail.date).format("DD/MM/YYYY")%></div>
+		<div class="six column row data">
+			<div class="column"><%=i%></div>
+			<div class="column"><%=detail.area%></div>
+			<div class=" column"><%=detail.equip%></div>
+			<div class=" column"><%=detail.loc%></div>
+			<div class="column"><%=detail.payment%></div>
+			<div class="column"><%=moment(detail.date).format("DD/MM/YYYY")%></div>
 		</div>
 		<%i+=1;%>
 	<% }) %>
 	<% include ../Metadata/row %>
+	<div class="four column row">
+		<div class="column colred">Total Due Amount</div>
+		<div class="column colred"><%=user.dtotal%></div>
+		<div class="column colgreen">Total Paid Amount</div>
+		<div class="column colgreen"><%=user.ctotal%></div>
+	</div>
 	</div>
 </div>
 <%}%>

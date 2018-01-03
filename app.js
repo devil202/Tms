@@ -32,7 +32,7 @@ rates();
 
 app.use(function(req,res,next)
 {
-	res.locals.user=req.user;
+	res.locals.Admin=req.user;
 	res.locals.moment=require('moment');
 	res.locals.formatTitle=require('format-title');
 	next();
@@ -43,14 +43,15 @@ var mainRoute=require('./models/index'),
 	newRoute=require('./models/new'),
 	updateRoute=require('./models/update'),
 	searchRoute=require('./models/search'),
+	showRoute=require('./models/showall'),
 	settingRoute=require('./models/setting');
 
 
 app.set('view engine','ejs');
 app.use(body.urlencoded({extended:true}));
 app.use(express.static('public'));
-db.connect('mongodb://localhost/Tms');
-// db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
+// db.connect('mongodb://localhost/Tms');
+db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
 
 // routes
 app.use("/",mainRoute);
@@ -58,15 +59,20 @@ app.use("/new",newRoute);
 app.use("/update",updateRoute);
 app.use("/search",searchRoute);
 app.use("/setting",settingRoute);
+app.use("/showall",showRoute);
 
 
 // var user=new users({
 // 	name:'brijraj singh',
 // 	username:'9451510063',
-// 	Password:'brijraj94@',
-// 	role:'admin',
+// 	password:'brijraj94@',
+// 	role:'admin'
 // });
-// users.register(user,user.Password);
+// users.register(user,user.password,function(err,user)
+// {
+// 	if(err)console.log(err);
+// 	else console.log(user);
+// });
 
 const port=process.env.PORT||3000;
 

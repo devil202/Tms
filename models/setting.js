@@ -1,6 +1,7 @@
 var rate=require('./Rate'),
 	express=require('express'),
 	{isLoggedIn}=require('./middleware'),
+	{admin}=require('./middleware'),
 	router=express.Router({mergeParams:true});
 
 router.get('/',isLoggedIn,function(req,res)
@@ -15,7 +16,7 @@ router.get('/',isLoggedIn,function(req,res)
 });
 
 
-router.post('/',isLoggedIn,function(req,res)
+router.post('/',[isLoggedIn,admin],function(req,res)
 {
 	rate.findOneAndUpdate({'name':req.body.x.name},req.body.x,function(error,rate){
 		if(!error)

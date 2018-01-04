@@ -14,10 +14,6 @@ var userSchema=new db.Schema({
 	dtotal:{type:Number,default:0},
 	total:{type:Number,default:0}
 });
-userSchema.methods.validPassword = function( pwd ) {
-     if( this.password === pwd ) return true;
-     else return false;
-};
 
 userSchema.plugin(passportLocalMongoose);
 

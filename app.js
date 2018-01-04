@@ -3,7 +3,7 @@ var express=require('express'),
 	body=require('body-parser'),
 	db=require('mongoose'),
 	session=require('express-session'),
-	MongoStore = require('connect-mongo')(session),
+	MongoStore = require('connect-mongo')(session); 
 	details=require('./models/Details'),
 	users=require('./models/users'),
 	rate=require('./models/Rate'),
@@ -15,32 +15,28 @@ var express=require('express'),
 	app=express();
 
 
+
+//App Configurations
+
+app.set('view engine','ejs');
+app.use(body.urlencoded({extended:true}));
+app.use(express.static('public'));
+// db.connect('mongodb://localhost/Tms');
+db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
+
+
 // Password Hash
 app.use(session({
     secret:"This is a Tractor Management System.",
-    store: new MongoStore({ url: 'mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms' }),
+    store: new MongoStore({ url: 'mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms'}),
     resave:false,
 	saveUninitialized:false
 }));
 
-
 // Passpost Configuration
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    users.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false);
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false);
-      }
-      return done(null, user);
-    });
-  }
-));
+passport.use(new LocalStrategy(users.authenticate()));
 passport.serializeUser(users.serializeUser());
 passport.deserializeUser(users.deserializeUser());
 
@@ -63,11 +59,7 @@ var mainRoute=require('./models/index'),
 	settingRoute=require('./models/setting');
 
 
-app.set('view engine','ejs');
-app.use(body.urlencoded({extended:true}));
-app.use(express.static('public'));
-// db.connect('mongodb://localhost/Tms');
-db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
+
 
 // routes
 app.use("/",mainRoute);

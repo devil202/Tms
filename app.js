@@ -22,13 +22,14 @@ app.set('view engine','ejs');
 app.use(body.urlencoded({extended:true}));
 app.use(express.static('public'));
 // db.connect('mongodb://localhost/Tms');
-db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
+// db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
+db.connect('mongodb://brijraj:brijraj@cluster0-shard-00-00-4l7li.mongodb.net:27017,cluster0-shard-00-01-4l7li.mongodb.net:27017,cluster0-shard-00-02-4l7li.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin');
 
 
 // Password Hash
 app.use(session({
     secret:"This is a Tractor Management System.",
-    store: new MongoStore({ url: 'mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms'}),
+    store: new MongoStore({ url: 'mongodb://brijraj:brijraj@cluster0-shard-00-00-4l7li.mongodb.net:27017,cluster0-shard-00-01-4l7li.mongodb.net:27017,cluster0-shard-00-02-4l7li.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin'}),
     resave:false,
 	saveUninitialized:false
 }));

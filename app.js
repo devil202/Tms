@@ -2,6 +2,8 @@
 var express=require('express'),
 	body=require('body-parser'),
 	db=require('mongoose'),
+	session=require('express-session'),
+	MongoStore = require('connect-mongo')(session),
 	details=require('./models/Details'),
 	users=require('./models/users'),
 	rate=require('./models/Rate'),
@@ -14,9 +16,10 @@ var express=require('express'),
 
 
 // Password Hash
-app.use(require('express-session')({
-	secret:"This is a Tractor Management System.",
-	resave:false,
+app.use(session({
+    secret:"This is a Tractor Management System.",
+    store: new MongoStore({ url: 'mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms' }),
+    resave:false,
 	saveUninitialized:false
 }));
 

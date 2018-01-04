@@ -24,7 +24,20 @@ app.use(require('express-session')({
 // Passpost Configuration
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(users.authenticate()));
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    users.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false);
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false);
+      }
+      return done(null, user);
+    });
+  }
+));
 passport.serializeUser(users.serializeUser());
 passport.deserializeUser(users.deserializeUser());
 

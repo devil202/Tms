@@ -60,7 +60,9 @@ router.post('/changepw/:id',isLoggedIn,function(req,res)
 
 router.post('/signin',passport.authenticate("local",{
 	successRedirect:'/new',
-	failureRedirect:'/'
+	failureRedirect:'/',
+	badRequestMessage : 'Missing username or password.',
+	failureFlash:true
 }));
 
 module.exports=router;

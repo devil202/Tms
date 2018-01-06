@@ -3,7 +3,7 @@ var express=require('express'),
 	body=require('body-parser'),
 	db=require('mongoose'),
 	session=require('express-session'),
-	MongoStore = require('connect-mongo')(session); 
+	MongoStore = require('connect-redis')(session); 
 	details=require('./models/Details'),
 	users=require('./models/users'),
 	rate=require('./models/Rate'),
@@ -12,6 +12,9 @@ var express=require('express'),
 	{rates}=require('./models/cal'),
 	{calculation}=require('./models/cal'),
 	LocalStrategy=require('passport-local'),
+	rtg   = require("url").parse(process.env.REDISTOGO_URL);
+	redis = require("redis").createClient(rtg.port, rtg.hostname);
+	redis.auth(rtg.auth.split(":")[1]);
 	app=express();
 
 
@@ -22,14 +25,14 @@ app.set('view engine','ejs');
 app.use(body.urlencoded({extended:true}));
 app.use(express.static('public'));
 // db.connect('mongodb://localhost/Tms');
-// db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
-db.connect('mongodb://brijraj:brijraj@cluster0-shard-00-00-4l7li.mongodb.net:27017,cluster0-shard-00-01-4l7li.mongodb.net:27017,cluster0-shard-00-02-4l7li.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin');
+db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
+// db.connect('mongodb://brijraj:brijraj@cluster0-shard-00-00-4l7li.mongodb.net:27017,cluster0-shard-00-01-4l7li.mongodb.net:27017,cluster0-shard-00-02-4l7li.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin');
 
 
 // Password Hash
 app.use(session({
     secret:"This is a Tractor Management System.",
-    store: new MongoStore({ url: 'mongodb://brijraj:brijraj@cluster0-shard-00-00-4l7li.mongodb.net:27017,cluster0-shard-00-01-4l7li.mongodb.net:27017,cluster0-shard-00-02-4l7li.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin'}),
+    store: new RedisStore(redis),
     resave:false,
 	saveUninitialized:false
 }));

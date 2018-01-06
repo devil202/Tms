@@ -2,8 +2,10 @@
 var express=require('express'),
 	body=require('body-parser'),
 	db=require('mongoose'),
+	rtg   = require("url").parse(process.env.REDISTOGO_URL),
+	redis = require("redis").createClient(rtg.port, rtg.hostname),
 	session=require('express-session'),
-	MongoStore = require('connect-redis')(session); 
+	RedisStore = require('connect-redis')(session); 
 	details=require('./models/Details'),
 	users=require('./models/users'),
 	rate=require('./models/Rate'),
@@ -12,11 +14,9 @@ var express=require('express'),
 	{rates}=require('./models/cal'),
 	{calculation}=require('./models/cal'),
 	LocalStrategy=require('passport-local'),
-	rtg   = require("url").parse(process.env.REDISTOGO_URL);
-	redis = require("redis").createClient(rtg.port, rtg.hostname);
-	redis.auth(rtg.auth.split(":")[1]);
 	app=express();
-
+	console.log(redis);
+redis.auth(rtg.auth.split(":")[1]);
 
 
 //App Configurations

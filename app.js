@@ -16,7 +16,7 @@ var express=require('express'),
 	{calculation}=require('./models/cal'),
 	LocalStrategy=require('passport-local'),
 	app=express();
-redis.auth(rtg.auth.split(":")[1]);
+// redis.auth(rtg.auth.split(":")[1]);
 console.log(redis);
 
 //App Configurations

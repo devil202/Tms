@@ -1,8 +1,9 @@
 // Neccesarry  Dependencies
+var Redis=process.env.REDISTOGO_URL||'redis://redistogo:3d78852b497ec3c7f822c484f79623b3@soldierfish.redistogo.com:10026/';
 var express=require('express'),
 	body=require('body-parser'),
 	db=require('mongoose'),
-	rtg   = require("url").parse(process.env.REDISTOGO_URL),
+	rtg   = require("url").parse(Redis),
 	redis = require("redis").createClient(rtg.port, rtg.hostname),
 	session=require('express-session'),
 	RedisStore = require('connect-redis')(session); 
@@ -15,9 +16,8 @@ var express=require('express'),
 	{calculation}=require('./models/cal'),
 	LocalStrategy=require('passport-local'),
 	app=express();
-	console.log(redis);
 redis.auth(rtg.auth.split(":")[1]);
-
+console.log(redis);
 
 //App Configurations
 
@@ -32,7 +32,7 @@ db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
 // Password Hash
 app.use(session({
     secret:"This is a Tractor Management System.",
-    store: new RedisStore(redis),
+    store: new RedisStore({ client : redis }),
     resave:false,
 	saveUninitialized:false
 }));

@@ -1,5 +1,3 @@
-var users=require('./users');
-
 function isLoggedIn(req,res,next)
 {
 	if(req.isAuthenticated())
@@ -17,10 +15,7 @@ function admin(req,res,next)
 	}
 	else
 	{
-		users.findById(req.user.id).populate('details').exec(function(err,data)
-		{
-			res.render('search',{y:false,x:true,content:data.details,user:data});
-		});
+		res.redirect('/setting/user');
 	}
 }
 

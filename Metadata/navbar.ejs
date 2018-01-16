@@ -1,6 +1,7 @@
 <div class="ui fixed inverted borderless menu">
 	<div class="ui container">
-		<div class="header item"><a href="/"><i class="cube icon"></i> TMS</a></div>
+		<div class="header item"><a <%if(Admin && Admin.role=="admin"){%> href="/showall" 
+			<%}else if (Admin && Admin.role!="admin") {}{ href="/setting/user" <%}%> ><i class="cube icon"></i> TMS</a></div>
 		<%if(Admin && Admin.role=="admin"){%>
 		<a class="item" href="/new">Add</a>
 		<a class="item" href="/update">Update</a>
@@ -8,7 +9,7 @@
 		<a class="item" href="/search">Search  <i class="search icon"></i></a>
 	 <%}%>
 		<%if (Admin) {%>
-			<a href="/setting" class="right item"><i class="ui avatar settings icon">Setting</i></a>
+			<a href="/setting" class="right item"><i class="ui avatar settings icon"></i>Setting</a>
 			<a class="right item" href="/signout">Sign Out</a>
 		<%}%>
 	</div>

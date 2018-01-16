@@ -15,15 +15,6 @@ router.get('/',isLoggedIn,function(req,res)
 	});
 });
 
-router.get('/user',isLoggedIn,function(req,res)
-{
-	users.findById(req.user.id).populate('details').exec(function(err,data)
-	{
-		if (err) {req.logout();res.redirect('/');}
-		else res.render('search',{y:false,x:true,content:data.details,user:data});
-	});
-});
-
 router.post('/',[isLoggedIn,admin],function(req,res)
 {
 	// rate.create(req.body.x,function(err,rate)

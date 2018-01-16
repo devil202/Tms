@@ -1,7 +1,7 @@
 <div class="ui fixed inverted borderless menu">
 	<div class="ui container">
 		<div class="header item"><a <% if(Admin && Admin.role=="admin"){%> href="/showall" 
-			<%}else if(Admin && Admin.role!="admin"){%> href="/setting/user" 
+			<%}else if(Admin && Admin.role!="admin"){%> href="/search/user" 
 			<%}else{%>
 			 href="/"<%}%> ><i class="cube icon"></i> TMS</a></div>
 		<%if(Admin && Admin.role=="admin"){%>

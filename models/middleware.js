@@ -15,7 +15,7 @@ function admin(req,res,next)
 	}
 	else
 	{
-		res.redirect('/setting/user');
+		res.redirect('/search/user');
 	}
 }
 

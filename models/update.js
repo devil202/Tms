@@ -15,7 +15,7 @@ router.post('/',[isLoggedIn,admin],function(req,res)
 {
 	var username=req.body.username;
 	var payment=req.body.payment;
-	users.findOne({username:username},function(err,user)
+	users.findOne({$or:[{username:username},{name:username.toLowerCase()}]},function(err,user)
 	{
 		if(user==null)
 		{

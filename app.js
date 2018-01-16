@@ -1,5 +1,4 @@
 // Neccesarry  Dependencies
-// var Redis=process.env.REDISTOGO_URL||'redis://redistogo:3d78852b497ec3c7f822c484f79623b3@soldierfish.redistogo.com:10026/';
 var express=require('express'),
 	body=require('body-parser'),
 	db=require('mongoose'),
@@ -21,8 +20,6 @@ app.use(body.urlencoded({extended:true}));
 app.use(express.static('public'));
 // db.connect('mongodb://localhost/Tms');
 db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
-// db.connect('mongodb://brijraj:brijraj@cluster0-shard-00-00-4l7li.mongodb.net:27017,cluster0-shard-00-01-4l7li.mongodb.net:27017,cluster0-shard-00-02-4l7li.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin');
-
 
 // Redis for session store on Heroku
 if (process.env.REDISTOGO_URL) {
@@ -34,7 +31,7 @@ if (process.env.REDISTOGO_URL) {
     var redis = require("redis").createClient();
 }
 
-// Password Hash
+//Session Store
 app.use(session({
     secret:"This is a Tractor Management System.",
     // store: new RedisStore({ client : redis }),

@@ -10,6 +10,15 @@ router.get('/',[isLoggedIn,admin],function(req,res)
 	res.render('search',{x:false,y:true});
 });
 
+router.get('/user',isLoggedIn,function(req,res)
+{
+	users.findById(req.user.id).populate('details').exec(function(err,data)
+	{
+		if (err) {req.logout();res.redirect('/');}
+		else res.render('search',{y:false,x:true,content:data.details,user:data});
+	});
+});
+
 router.post('/',[isLoggedIn,admin],function(req,res)
 {
 	var username=req.body.username;

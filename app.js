@@ -18,8 +18,8 @@ var express=require('express'),
 app.set('view engine','ejs');
 app.use(body.urlencoded({extended:true}));
 app.use(express.static('public'));
-// db.connect('mongodb://localhost/Tms');
-db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
+db.connect('mongodb://localhost/Tms');
+// db.connect('mongodb://brijraj:brijraj@ds239137.mlab.com:39137/tms');
 
 // Redis for session store on Heroku
 if (process.env.REDISTOGO_URL) {
@@ -75,18 +75,11 @@ app.use("/search",searchRoute);
 app.use("/setting",settingRoute);
 app.use("/showall",showRoute);
 
+app.get('*',function(req,res)
+{
+	res.redirect('/');
+});
 
-// var user=new users({
-// 	name:'brijraj singh',
-// 	username:'9451510063',
-// 	password:'brijraj94@',
-// 	role:'admin'
-// });
-// users.register(user,user.password,function(err,user)
-// {
-// 	if(err)console.log(err);
-// 	else console.log(user);
-// });
 
 const port=process.env.PORT||3000;
 

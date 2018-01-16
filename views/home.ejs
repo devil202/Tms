@@ -2,6 +2,13 @@
 <div class="ui padded inverted segment container">
 	<div class="ui centered padded grid">
 	<%include ../Metadata/row %>
+	<div class="one column row" >
+		<div class="column">
+			<%if(x){%>
+			<label class="ui negative message">*Username and/or Password don't Match!</label>
+			<%}%>
+		</div>
+	</div>
     <div class="four column row">
 	  <form class="ui big inverted form" action="/signin" method="post">
 	    <div class="fields">

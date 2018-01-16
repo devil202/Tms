@@ -18,21 +18,21 @@ router.get('/',isLoggedIn,function(req,res)
 
 router.post('/',[isLoggedIn,admin],function(req,res)
 {
-	// rate.create(req.body.x,function(err,rate)
-	// {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	}
-	// 	else res.redirect('/setting');
-	// })
-	rate.findOneAndUpdate({'name':req.body.x.name},req.body.x,function(error,rate){
-		if(!error)
-		{
-			rates();
-			res.redirect('/setting');
+	rate.create(req.body.x,function(err,rate)
+	{
+		if (err) {
+			console.log(err);
 		}
 		else res.redirect('/setting');
-	});
+	})
+	// rate.findOneAndUpdate({'name':req.body.x.name},req.body.x,function(error,rate){
+	// 	if(!error)
+	// 	{
+	// 		rates();
+	// 		res.redirect('/setting');
+	// 	}
+	// 	else res.redirect('/setting');
+	// });
 });
 
 module.exports=router;

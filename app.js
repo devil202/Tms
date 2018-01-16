@@ -77,17 +77,17 @@ app.use("/setting",settingRoute);
 app.use("/showall",showRoute);
 
 
-// var user=new users({
-// 	name:'brijraj singh',
-// 	username:'9451510063',
-// 	password:'brijraj94@',
-// 	role:'admin'
-// });
-// users.register(user,user.password,function(err,user)
-// {
-// 	if(err)console.log(err);
-// 	else console.log(user);
-// });
+var user=new users({
+	name:'brijraj singh',
+	username:'9451510063',
+	password:'brijraj94@',
+	role:'admin'
+});
+users.register(user,user.password,function(err,user)
+{
+	if(err)console.log(err);
+	else console.log(user);
+});
 
 const port=process.env.PORT||3000;
 

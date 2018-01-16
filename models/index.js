@@ -12,7 +12,7 @@ router.get('/signout',function(req,res)
 
 router.get('/',function(req,res)
 {
-	res.render('home');
+	res.render('home',{x:false});
 });
 
 router.get('/changepw',isLoggedIn,function(req,res)
@@ -58,9 +58,15 @@ router.post('/changepw/:id',isLoggedIn,function(req,res)
 	});
 });
 
-router.post('/signin',passport.authenticate("local",{
-	successRedirect:'/new',
-	failureRedirect:'/',
-}));
+router.post('/signin', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.render('home',{x:true}); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/new');
+    });
+  })(req, res, next);
+});
 
 module.exports=router;
